@@ -57,21 +57,49 @@ class Solution{
     public static void rearrange(long arr[], int n){
         
         // Your code here
-        long[] arr2 = new long[n];
+        long max = arr[n-1]+1;  // max+1 so it gives 0 when it divides any element in array and doesn't manipulate it
+        int left = 0;
+        int right = n-1;
         
-         for(int i=0; i<n; i++)
-            arr2[i] = arr[i];
-            
-        int j= 0;
-        for(int i=0; i<n;i++) {
-            
-            if(i%2 == 0)
-                arr[i] = arr2[n-j-1];
-            else
-                arr[i] = arr2[j++];
+        // % gives original value
+        // / gives expected value
+        // current + (max * The value we want)
+        for(int i=0; i<n; i++) {
+            if(i % 2 == 0) {
+                // max value here
+                arr[i] = arr[i] + (max * (arr[right--] % max) );
+            }
+            else {
+                arr[i] = arr[i] + (max * (arr[left++] % max) );
+            }
+        }
+        
+        for(int i=0; i<n; i++) {
+            arr[i] /= max;
         }
     }
-    
 }
+    
+    
+    
+        
+        
+        // O(N) space
+    //     long[] arr2 = new long[n];
+        
+    //      for(int i=0; i<n; i++)
+    //         arr2[i] = arr[i];
+            
+    //     int j= 0;
+    //     for(int i=0; i<n;i++) {
+            
+    //         if(i%2 == 0)
+    //             arr[i] = arr2[n-j-1];
+    //         else
+    //             arr[i] = arr2[j++];
+    //     }
+    // }
+    
+// }
 
 
